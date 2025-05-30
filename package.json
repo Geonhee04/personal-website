@@ -1,0 +1,22 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "Personal website for Geonhee Lee",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Geonhee04/personal-website.git"
+  },
+  "author": "Geonhee Lee",
+  "license": "MIT"
+} 
