@@ -81,4 +81,131 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = '';
         });
     });
-}); 
+
+    // Media upload functionality for Metriq section
+    setupMediaUpload();
+    
+    // Demo video button functionality
+    setupDemoVideoButton();
+});
+
+function setupMediaUpload() {
+    // Note: Video is now directly embedded, no upload needed
+    
+    // Screenshot placeholder click handlers
+    const screenshotPlaceholders = document.querySelectorAll('.screenshot-placeholder');
+    screenshotPlaceholders.forEach((placeholder, index) => {
+        placeholder.addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/jpeg,image/jpg,image/png,image/webp';
+            input.style.display = 'none';
+            
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    displayScreenshot(file, placeholder, index);
+                }
+            });
+            
+            document.body.appendChild(input);
+            input.click();
+            document.body.removeChild(input);
+        });
+    });
+}
+
+function displayVideo(file, placeholder) {
+    // This function is no longer needed since we're using direct video files
+    // Keeping it commented for potential future use
+    /*
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const video = document.createElement('video');
+        video.src = e.target.result;
+        video.controls = true;
+        video.style.width = '100%';
+        video.style.height = '100%';
+        video.style.borderRadius = '16px';
+        video.style.objectFit = 'cover';
+        
+        placeholder.innerHTML = '';
+        placeholder.appendChild(video);
+        placeholder.style.background = 'none';
+    };
+    reader.readAsDataURL(file);
+    */
+}
+
+function displayScreenshot(file, placeholder, index) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.borderRadius = '12px';
+        img.style.objectFit = 'cover';
+        img.alt = `Metriq app screenshot ${index + 1}`;
+        
+        placeholder.innerHTML = '';
+        placeholder.appendChild(img);
+        placeholder.style.background = 'none';
+        placeholder.style.border = 'none';
+    };
+    reader.readAsDataURL(file);
+}
+
+function setupDemoVideoButton() {
+    const exploreBtn = document.querySelector('.explore-btn');
+    const modal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const closeBtn = document.querySelector('.close-modal');
+
+    if (exploreBtn && modal && modalVideo) {
+        // Open modal when explore button is clicked
+        exploreBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            
+            // Try to auto-play the video
+            setTimeout(() => {
+                modalVideo.play().catch(e => {
+                    console.log('Auto-play prevented by browser');
+                });
+            }, 300);
+        });
+
+        // Close modal when X button is clicked
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeModal();
+            });
+        }
+
+        // Close modal when clicking outside the video
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+            modalVideo.pause();
+            modalVideo.currentTime = 0; // Reset video to beginning
+        }
+    }
+}
+
+
+
+ 
