@@ -6,7 +6,12 @@ const port = process.env.PORT || 3000;
 // Serve static files from the current directory
 app.use(express.static(path.join(__dirname)));
 
-// Route all requests to index.html for single-page application behavior
+// Specific route for pitch deck
+app.get('/pitch-deck.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pitch-deck.html'));
+});
+
+// Route all other requests to index.html for single-page application behavior
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });

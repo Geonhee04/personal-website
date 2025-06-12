@@ -376,6 +376,10 @@ body {
 
 .cta-section {
     margin-top: auto;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .explore-btn {
@@ -406,6 +410,36 @@ body {
 
 .explore-btn:hover svg {
     transform: translateX(2px);
+}
+
+.pitch-deck-btn {
+    background: #2d3748;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(45, 55, 72, 0.3);
+}
+
+.pitch-deck-btn:hover {
+    background: #1a202c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(45, 55, 72, 0.4);
+}
+
+.pitch-deck-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.pitch-deck-btn:hover svg {
+    transform: scale(1.1);
 }
 
 /* Hero Headline */
@@ -1547,6 +1581,17 @@ body {
     .explore-btn {
         padding: 14px 28px;
         font-size: 0.9rem;
+    }
+
+    .pitch-deck-btn {
+        padding: 14px 28px;
+        font-size: 0.9rem;
+    }
+
+    .cta-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
     }
 
     /* Video Modal Mobile */

@@ -158,51 +158,20 @@ function displayScreenshot(file, placeholder, index) {
 
 function setupDemoVideoButton() {
     const exploreBtn = document.querySelector('.explore-btn');
-    const modal = document.getElementById('video-modal');
-    const modalVideo = document.getElementById('modal-video');
-    const closeBtn = document.querySelector('.close-modal');
+    const pitchDeckBtn = document.querySelector('.pitch-deck-btn');
 
-    if (exploreBtn && modal && modalVideo) {
-        // Open modal when explore button is clicked
+    if (exploreBtn) {
+        // Navigate to pitch deck page when explore button is clicked
         exploreBtn.addEventListener('click', function() {
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            
-            // Try to auto-play the video
-            setTimeout(() => {
-                modalVideo.play().catch(e => {
-                    console.log('Auto-play prevented by browser');
-                });
-            }, 300);
+            window.location.href = 'pitch-deck.html';
         });
+    }
 
-        // Close modal when X button is clicked
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                closeModal();
-            });
-        }
-
-        // Close modal when clicking outside the video
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
+    if (pitchDeckBtn) {
+        // Navigate to presentation page
+        pitchDeckBtn.addEventListener('click', function() {
+            window.location.href = 'presentation.html';
         });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                closeModal();
-            }
-        });
-
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = ''; // Restore scrolling
-            modalVideo.pause();
-            modalVideo.currentTime = 0; // Reset video to beginning
-        }
     }
 }
 
